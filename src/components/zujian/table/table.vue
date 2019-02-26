@@ -38,6 +38,15 @@
             </template>
           </el-table-column>
         </el-table>
+        <el-pagination background
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[10, 50, 100, 200]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
       </el-tab-pane>
       <el-tab-pane label="表格2不带查询" name="tate2">表格2不带查询</el-tab-pane>
     </el-tabs>
@@ -45,10 +54,14 @@
 </template>
 
 <script>
+import {getTableData} from '@/axios/zujian/table-ajax.js';
 export default {
   data(){
     return {
       activeName:'tatel',
+      total: 5,
+      currentPage: 1,
+      pageSize: 10,
       tableData: [{
         date: '2016-05-02',
         name: '王小虎',
@@ -69,9 +82,18 @@ export default {
     }
   },
   methods:{
+    
     handleClick(){
      console.log(this.activeName)
     }
+  },
+  mounted(){
+    
+    getTableData(function(){
+      alert('serc')
+    },function(){
+      alert('fail')
+    });
   }
 }
 </script>

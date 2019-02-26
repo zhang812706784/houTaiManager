@@ -5,6 +5,7 @@ import {router} from './router/index.js';
 import store from '@/store/store.js'
 import App from './components/App.vue';
 import ElementUI from 'element-ui';
+import axios from 'axios';
 import {Storage} from '@/util/Storage.js'
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/css/common.css'
@@ -13,8 +14,8 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$Element = ElementUI;
 Vue.prototype.$Storage = Storage;
-
-new Vue({
+Vue.prototype.$http = axios;
+var vm = new Vue({
   el: '#app',
   router,
   store,
