@@ -5,6 +5,7 @@ html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input,
 }
 *{box-sizing: border-box;}
 html, body {
+    
     height: 100%;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
