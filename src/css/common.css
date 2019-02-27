@@ -40,3 +40,7 @@ input, textarea {
     outline: none;
     border: none;
 }
+
+.el-input{
+    width: 50%;
+}
