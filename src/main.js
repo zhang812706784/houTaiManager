@@ -5,6 +5,7 @@ import {router} from './router/index.js';
 import store from '@/store/store.js'
 import App from './components/App.vue';
 import ElementUI from 'element-ui';
+import lodash from 'lodash';
 import axios from 'axios';
 import {Storage} from '@/util/Storage.js'
 import 'element-ui/lib/theme-chalk/index.css';
@@ -15,6 +16,7 @@ Vue.use(ElementUI);
 Vue.prototype.$Element = ElementUI;
 Vue.prototype.$Storage = Storage;
 Vue.prototype.$http = axios;
+Vue.prototype._ = lodash;
 var vm = new Vue({
   el: '#app',
   router,
