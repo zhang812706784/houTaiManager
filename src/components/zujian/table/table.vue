@@ -62,7 +62,10 @@
       <el-tab-pane label="表格2不带查询" name="tate2">表格2不带查询</el-tab-pane>
     </el-tabs>
     <!-- 窗口 -->
-    <win  :winshow="winshow" :changewinshow="changeWinshow" :formdata="formData"></win>
+    <win  :winshow="winshow" :changewinshow="changeWinshow" 
+      :formdata="formData" 
+      v-if="winshow"> 
+    </win>
   </div>
 </template>
 
@@ -86,7 +89,6 @@ export default {
       this.winshow = val;
     },
     handleEdit(index,row){
-
       this.winshow = true;
       this.formData = row;
 
