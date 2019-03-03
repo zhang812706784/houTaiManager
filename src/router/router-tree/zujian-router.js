@@ -3,18 +3,21 @@ export const zuJianRouters = [{
     //表格
     path: 'zujian_tabel',
     name: 'zujian_tabel',
+    access:['guest'],
     title: '表格',
     component: () =>import('@/components/zujian/table/table')
 },{
     //表单
     path: 'zujian_form_1',
     name: 'zujian_form_1',
+    access:['admin'],
     title: '表单1',
     component: () =>import('@/components/zujian/form')
 },{
     //表单
     path: 'zujian_form',
     name: 'zujian_form',
+    access:['guest'],
     title: '表单',
     component: () =>import('@/components/zujian/form')
 },{

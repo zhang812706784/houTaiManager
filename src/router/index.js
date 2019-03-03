@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {menuRounters,treeRouters} from './routers.js'
+import {menuRounters} from './routers.js'
 import login from "@/components/login"
 
 Vue.use(VueRouter)
