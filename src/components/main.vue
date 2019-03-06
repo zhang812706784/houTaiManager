@@ -52,6 +52,7 @@
 <script>
 import {customZhiNanRouters} from '@/router/router-tree/zhinan-router.js';
 import {customZuJianRouters} from '@/router/router-tree/zujian-router.js';
+import { mapMutations,mapGetters } from 'vuex';
 export default {
     props: ['activename'],
     data(){

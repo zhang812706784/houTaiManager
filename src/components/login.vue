@@ -23,7 +23,7 @@
     </div>
 </template>
 <script>
-    import { mapMutations,mapGetters } from 'vuex';
+    import { mapMutations } from 'vuex';
     export default {
         data(){
             return {
@@ -33,11 +33,6 @@
                 }
             }
         },
-        computed:{
-            ...mapGetters([
-                "getRouterFromAccess"
-            ])
-        },
         methods: {
             submit(){
                 var obj = {
@@ -46,11 +41,6 @@
                 }
                 this.loginFun(obj);
                 //根据权限动态生成路由
-                console.log("前")
-                console.log(this.$router)
-                this.$router.addRoutes(this.getRouterFromAccess);
-                console.log("后")
-                console.log(this.$router)
                 this.$router.push({ name:"zhinan"});
             },
             ...mapMutations([

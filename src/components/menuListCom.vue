@@ -1,3 +1,8 @@
+/* 
+  登录页 跳转进来的页面 
+  上半部分 -- 横向菜单（一级菜单）
+  下半部分(路由) -- main.vue
+ */
 <template>
   <div class="menu-list-con">
     <!-- 首页上半部分 -->
@@ -17,13 +22,15 @@
     </el-row>
     <!-- 首页下半部分 -->
     <el-row class="menu-list-bottom">
-        <router-view :activename = "activeName" v-if="viewchange"></router-view>
+        <router-view :activename = "activeName" :treedata= "treedata"  v-if="viewchange"></router-view>
     </el-row>
   </div>
 </template>
 
 <script>
+import { mapMutations,mapGetters } from 'vuex';
 import {treeRouters} from '@/router/routers.js';
+
 export default {
   name: 'menu_name',
   data () {
@@ -31,45 +38,41 @@ export default {
       defaultActive: 'zhinan',
       treeRouters: treeRouters,
       activeName: 'zhinan',
+      treedata: [],//二级菜单数据
       viewchange : true
     }
   },
   methods:{
+    // 一级菜单切换 事件
     handleSelect(key, keyPath) {
+
       this.activeName = key;
+      this.treedata = this.getCustomRouter(this.activeName);
+      var name = this.treedata[0].name
+      this.$nextTick(()=>{
+          this.$router.push({
+            name: name
+        });
+      });
        //指南菜单走这里
-            if(this.activeName == "zhinan"){
-                //this.defaultActiveOfMain = path  + 'designPrinciples';
-                this.$nextTick(()=>{
-                   this.$router.push({
-                      name:'designPrinciples'
-                  });
-                });
-               
-            //组件菜单走这里
-            }else if(this.activeName == "zujian"){
-                //this.defaultActiveOfMain = path  + 'zujian_tabel';
-                this.$nextTick(()=>{
-                   this.$router.push({
-                      name:'zujian_tabel'
-                  });
-                });
-            }else if(this.activeName == "ziyuan"){
-                //this.defaultActiveOfMain = path  + 'zujian_tabel';
-                this.$nextTick(()=>{
-                   this.$router.push({
-                      name:'ziyuan'
-                  });
-                });
-            }else{
-              //this.defaultActiveOfMain = path  + 'zujian_tabel';
-                this.$nextTick(()=>{
-                   this.$router.push({
-                      name:'luntan'
-                  });
-                });
-            }
-            this.changeView();
+      /* if(this.activeName == "zhinan"){
+          //this.defaultActiveOfMain = path  + 'designPrinciples';
+          this.$nextTick(()=>{
+              this.$router.push({
+                name:'designPrinciples'
+            });
+          });
+          
+      //组件菜单走这里
+      }else if(this.activeName == "zujian"){
+          //this.defaultActiveOfMain = path  + 'zujian_tabel';
+          this.$nextTick(()=>{
+              this.$router.push({
+                name:'zujian_tabel'
+            });
+          });
+      } */
+      this.changeView();
 
     },
     changeView(){
@@ -79,8 +82,15 @@ export default {
       });
     }
   },
+  computed:{
+      ...mapGetters([
+          "getRouterFromAccess",
+          "getCustomRouter"
+      ])
+  },
   mounted(){
-    
+    debugger;
+    console.log(this);
     this.handleSelect("zhinan");
   }
 }
