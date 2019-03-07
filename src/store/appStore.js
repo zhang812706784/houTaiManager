@@ -55,13 +55,14 @@ const appStore = {
         },
         // 得到自定义的路由，用于菜单的显示
         getCustomRouter(state,activeTreeName){
-            var pri = "admin";
+            var pri = "guest";
            
             var digui = function(routers,newArray){
                 for(let i=0; i< routers.length; i++){
                     let item = routers[i];
                     var obj = {};
-                    if(item.childs && item.childs.length > 0){
+                    if(item.childs && item.childs.length > 0 
+                        && (!item.access || (item.access && item.access == pri))){
 
                         obj.path = item.path ? item.path : "";
                         obj.name = item.name;

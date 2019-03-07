@@ -64,6 +64,7 @@ export const customZuJianRouters = {
         path: 'zujian_zuhe',
         name: 'zujian_zuhe',
         title: '组合',
+        access:['admin'],
         component: () =>import('@/components/zujian/zuhe')
     }]
 }
