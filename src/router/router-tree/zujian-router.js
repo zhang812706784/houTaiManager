@@ -1,6 +1,6 @@
 //用于路由映射
 export const zuJianRouters = [{
-    //表格
+    //表格 -- -- 规定每个组件的path和name的值一定要一样
     path: 'zujian_tabel',
     name: 'zujian_tabel',
     access:['guest'],
@@ -35,7 +35,7 @@ export const customZuJianRouters = {
         name: 'tableParent',
         childs:[{
             //表格
-            path: 'zujian_tabel',
+            path: 'zujian_tabel',//-- 规定每个组件的path和name的值一定要一样
             name: 'zujian_tabel',
             access:['guest'],
             title: '表格',
@@ -64,6 +64,7 @@ export const customZuJianRouters = {
         path: 'zujian_zuhe',
         name: 'zujian_zuhe',
         title: '组合',
+        access:['admin'],
         component: () =>import('@/components/zujian/zuhe')
     }]
 }

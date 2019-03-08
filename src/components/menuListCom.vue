@@ -22,13 +22,14 @@
     </el-row>
     <!-- 首页下半部分 -->
     <el-row class="menu-list-bottom">
-        <router-view :activename = "activeName" :treedata= "treedata"  v-if="viewchange"></router-view>
+        <router-view :activename = "activeName" :treedata= "treedata"  :seconddefault = "seconddefault"
+          v-if="viewchange"></router-view>
     </el-row>
   </div>
 </template>
 
 <script>
-import { mapMutations,mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 import {treeRouters} from '@/router/routers.js';
 
 export default {
@@ -39,39 +40,30 @@ export default {
       treeRouters: treeRouters,
       activeName: 'zhinan',
       treedata: [],//二级菜单数据
-      viewchange : true
+      viewchange : true,
+      seconddefault: ''//二级菜单数据默认路由
     }
   },
   methods:{
+    ...mapMutations([
+        "getRouterFromAccess",
+        "getCustomRouter"
+    ]),
     // 一级菜单切换 事件
     handleSelect(key, keyPath) {
-
+     
       this.activeName = key;
-      this.treedata = this.getCustomRouter(this.activeName);
-      var name = this.treedata[0].name
+      this.getCustomRouter(this.activeName);
+      
+      this.treedata = this.$store.state.appStore.customRouters;
+      console.log(this.treedata);
+      var name = this.treedata[0].path ? this.treedata[0].name : this.treedata[0].childs[0].name;
+      this.seconddefault = '/menu_list/' + this.activeName +'/' + name;
       this.$nextTick(()=>{
           this.$router.push({
             name: name
         });
       });
-       //指南菜单走这里
-      /* if(this.activeName == "zhinan"){
-          //this.defaultActiveOfMain = path  + 'designPrinciples';
-          this.$nextTick(()=>{
-              this.$router.push({
-                name:'designPrinciples'
-            });
-          });
-          
-      //组件菜单走这里
-      }else if(this.activeName == "zujian"){
-          //this.defaultActiveOfMain = path  + 'zujian_tabel';
-          this.$nextTick(()=>{
-              this.$router.push({
-                name:'zujian_tabel'
-            });
-          });
-      } */
       this.changeView();
 
     },
@@ -83,14 +75,8 @@ export default {
     }
   },
   computed:{
-      ...mapGetters([
-          "getRouterFromAccess",
-          "getCustomRouter"
-      ])
   },
   mounted(){
-    debugger;
-    console.log(this);
     this.handleSelect("zhinan");
   }
 }

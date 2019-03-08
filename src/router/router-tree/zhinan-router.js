@@ -19,7 +19,7 @@ export const customZhiNanRouters = {
         title:'设计原则',
         name: 'designPrinciplesParent',
         childs:[{
-            //设计原则
+            //设计原则 -- 规定每个组件的path和name的值一定要一样
             path: 'designPrinciples',
             name: 'designPrinciples',
             title: '设计原则详情',

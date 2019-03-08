@@ -8,13 +8,13 @@
                     <el-radio-button :label="true">收起</el-radio-button>
                 </el-radio-group> -->
                 <!-- :default-openeds="openeds" -->
-                <el-menu :default-active="defaultActiveOfMain" class="el-menu-vertical-demo" 
+                <el-menu :default-active="seconddefault" class="el-menu-vertical-demo" 
                 @open="openMenu"
                 router 
                 :collapse="isCollapse" 
                 unique-opened 
                 :default-openeds="openeds">
-                    <template v-for="(treeItem,i) in treeData">
+                    <template v-for="(treeItem,i) in treedata">
                         <!-- 最后一级菜单 -->
                         <el-menu-item v-if="!treeItem.childs"
                         :key="i" 
@@ -54,28 +54,12 @@ import {customZhiNanRouters} from '@/router/router-tree/zhinan-router.js';
 import {customZuJianRouters} from '@/router/router-tree/zujian-router.js';
 import { mapMutations,mapGetters } from 'vuex';
 export default {
-    props: ['activename'],
+    props: ['activename','treedata','seconddefault'],
     data(){
         return {
             isCollapse: false,
-            defaultActiveOfMain: '/menu_list/zhinan/designPrinciples',
             openeds: [0]
         };
-    },
-    computed:{
-        //左树要显示的内容
-        treeData: function(){
-            var path = '/menu_list/' + this.activename +'/';
-            //指南菜单走这里
-            if(customZhiNanRouters.name == this.activename){
-            
-                return customZhiNanRouters.childs;
-            //组件菜单走这里
-            }else if(customZuJianRouters.name == this.activename){
-                this.defaultActiveOfMain = path  + 'zujian_tabel';
-                return customZuJianRouters.childs;
-            }
-        }
     },
     methods:{
         openMenu(){
