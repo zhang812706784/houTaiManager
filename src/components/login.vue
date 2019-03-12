@@ -37,7 +37,8 @@
             submit(){
                 var obj = {
                     u: this.form.userName,
-                    p: this.form.passWord
+                    p: this.form.passWord,
+                    pri: 'guest'
                 }
                 this.loginFun(obj);
                 //根据权限动态生成路由

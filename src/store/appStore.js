@@ -1,14 +1,13 @@
 import {treeRouters} from '@/router/routers.js'
 import {customZhiNanRouters} from '@/router/router-tree/zhinan-router.js';
 import {customZuJianRouters} from '@/router/router-tree/zujian-router.js';
+import Cookies from 'js-cookie';
 const appStore = {
     state: {
         globalLoading: false,
         customRouters: []//用于显示左侧导航（树）
     },
-    getters: {
-        
-    },
+    getters: {},
     mutations:{
         opreateLobalLoading(state,val){
             state.globalLoading = val;
@@ -55,8 +54,8 @@ const appStore = {
         },
         // 得到自定义的路由，用于菜单的显示
         getCustomRouter(state,activeTreeName){
-            var pri = "guest";
-           
+            
+            var pri = Cookies.get('access');
             var digui = function(routers,newArray){
                 for(let i=0; i< routers.length; i++){
                     let item = routers[i];

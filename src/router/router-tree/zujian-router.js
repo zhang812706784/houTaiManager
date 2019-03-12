@@ -3,21 +3,27 @@ export const zuJianRouters = [{
     //表格 -- -- 规定每个组件的path和name的值一定要一样
     path: 'zujian_tabel',
     name: 'zujian_tabel',
-    access:['guest'],
+    meta: {
+        access:['guest'],
+    },
     title: '表格',
     component: () =>import('@/components/zujian/table/table')
 },{
     //表单
     path: 'zujian_form_1',
     name: 'zujian_form_1',
-    access:['admin'],
+    meta: {
+        access:['admin'],
+    },
     title: '表单1',
     component: () =>import('@/components/zujian/form')
 },{
     //表单
     path: 'zujian_form',
     name: 'zujian_form',
-    access:['guest'],
+    meta: {
+        access:['guest'],
+    },
     title: '表单',
     component: () =>import('@/components/zujian/form')
 },{

@@ -1,13 +1,18 @@
+import Cookies from 'js-cookie'
 const user = {
     state: {
-        userstore_name: '',
-        userstore_password: ''
+        userName: '',
+        passWord: '',
+        access:''
     },
     mutations: {
         //登录页面触发的事件
         loginFun:function(state,obj){
-            state.userstore_name = obj.u;
-            state.userstore_password = obj.p;
+            state.userName = obj.u;
+            state.passWord = obj.p;
+            state.access = obj.pri;
+            Cookies.set('userName', state.userName, { expires: 7 });
+            Cookies.set('access', state.access, { expires: 7 });
         }
     },
     getters: {
