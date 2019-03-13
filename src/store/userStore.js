@@ -13,6 +13,12 @@ const user = {
             state.access = obj.pri;
             Cookies.set('userName', state.userName, { expires: 7 });
             Cookies.set('access', state.access, { expires: 7 });
+        },
+         // 退出登录
+        loginOut(state){
+            state.userName = '';
+            Cookies.remove('userName');
+            
         }
     },
     getters: {

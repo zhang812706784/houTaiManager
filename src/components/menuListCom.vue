@@ -17,7 +17,14 @@
         </el-menu>
       </el-col>
       <el-col :span="3" class="menu-list-top-other">
-        其他
+        
+         <div class="username">
+            <i class="el-icon-bell userface"></i>
+            <span v-text="username"></span>
+         </div>
+         <div class="layout" @click="quit">
+            退出
+         </div>
       </el-col>
     </el-row>
     <!-- 首页下半部分 -->
@@ -31,6 +38,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import {treeRouters} from '@/router/routers.js';
+import Cookies from 'js-cookie'
 
 export default {
   name: 'menu_name',
@@ -41,14 +49,22 @@ export default {
       activeName: 'zhinan',
       treedata: [],//二级菜单数据
       viewchange : true,
-      seconddefault: ''//二级菜单数据默认路由
+      seconddefault: '',//二级菜单数据默认路由
+      username: ''
     }
   },
   methods:{
     ...mapMutations([
         "getRouterFromAccess",
-        "getCustomRouter"
+        "getCustomRouter",
+        "loginOut"
     ]),
+    quit(){
+      this.loginOut();
+      this.$router.push({
+          name:"login"
+      })
+    },
     // 一级菜单切换 事件
     handleSelect(key, keyPath) {
      
@@ -77,6 +93,7 @@ export default {
   computed:{
   },
   mounted(){
+    this.username = Cookies.get("userName");
     this.handleSelect("zhinan");
   }
 }
@@ -98,11 +115,24 @@ export default {
   .menu-list-top-other{
     height: 60px;
     display: flex;
+    justify-content: space-around;
     align-items: center;
     color: #909399;
     cursor:default;
+    font-size: 16px;
+    color: #00bbff;
   }
-  .menu-list-bottom{
+  .menu-list-top-other .username span{
+    color: #909399;
+  }
+  .menu-list-top-other .layout{
+    cursor: pointer;
+    color: #909399;
+  }
+  .menu-list-top-other .layout:hover{
+    color: #00bbff;
+  }
+  .menu-list-bottom{ 
     height: calc(100% - 61px);
   }
 </style>
